@@ -13,11 +13,7 @@ namespace IBASEmployeeService.Controllers
             _logger = logger;
         }
 
-
-        [HttpGet("GetEmployees")]
-        public IEnumerable<Employee> Get()
-        {
-            var employees = new List<Employee>() {
+        private readonly List<Employee> employees = new List<Employee>(){
             new Employee() {
                 Id = "21",
                 Name = "Mette Bangsbo",
@@ -44,8 +40,69 @@ namespace IBASEmployeeService.Controllers
                     Id = 2,
                     Name = "Support"
                 }
+            },
+
+            new Employee() {
+                Id = "24",
+                Name = "Benedikte Busack",
+                Email = "bebu@ibas.dk",
+                Department = new Department() {
+                    Id = 3,
+                    Name = "IT"
+                }
+            },
+
+            new Employee() {
+                Id = "25",
+                Name = "Laura-Amalie Kildemoes",
+                Email = "laki@ibas.dk",
+                Department = new Department() {
+                    Id = 3,
+                    Name = "IT"
+                }
+            },
+
+            new Employee() {
+                Id = "26",
+                Name = "Niels Dissing",
+                Email = "nidi@ibas.dk",
+                Department = new Department() {
+                    Id = 3,
+                    Name = "IT"
+                }
+            },
+
+            new Employee() {
+                Id = "27",
+                Name = "Karen Nielsen",
+                Email = "kani@ibas.dk",
+                Department = new Department() {
+                    Id = 4,
+                    Name = "Kantinen"
+                }
+            },
+
+            new Employee() {
+                Id = "28",
+                Name = "Børge Rasmussen",
+                Email = "børa@ibas.dk",
+                Department = new Department() {
+                    Id = 4,
+                    Name = "Kantinen"
+                }
             }
         };
+
+        [HttpGet("GetAfdeling/{Id}")]
+        public IEnumerable<Employee> GetKantine(int Id)
+        {
+            var afdelinger = employees.Where(e => e.Department != null && e.Department.Id == Id);
+            return afdelinger;
+        }
+
+        [HttpGet("GetEmployees")]
+        public IEnumerable<Employee> Get()
+        {
             return employees;
         }
     }
